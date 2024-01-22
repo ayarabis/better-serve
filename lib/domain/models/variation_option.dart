@@ -34,6 +34,7 @@ class VariationOption {
         value: value,
         price: price,
         isSelected: isSelected,
+        isDefault: isDefault,
       );
 
   factory VariationOption.empty() => VariationOption(

@@ -35,6 +35,7 @@ class AttributeOption extends Equatable {
         value: value,
         order: order,
         isSelected: isSelected,
+        isDefault: isDefault,
       );
 
   @override

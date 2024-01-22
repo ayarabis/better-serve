@@ -38,7 +38,7 @@ class Variation extends Equatable {
   }
 
   Variation clone() => Variation(
-        id: id,
+        id: null,
         name: name,
         label: label,
         options: options.map((e) => e.clone()).toList(),

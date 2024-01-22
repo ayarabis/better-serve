@@ -37,7 +37,7 @@ class Attribute extends Equatable {
       };
 
   Attribute clone() => Attribute(
-        id: id,
+        id: null,
         name: name,
         label: label,
         isMultiple: isMultiple,
