@@ -194,6 +194,7 @@ class _CartPageState extends State<CartPage> {
                             key: ObjectKey(item),
                             index: index,
                             fullSwipeFactor: 0.3,
+                            deleteAnimationDuration: 200,
                             trailingActions: [
                               SwipeAction(
                                   icon: const Icon(
