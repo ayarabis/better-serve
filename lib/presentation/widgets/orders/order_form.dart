@@ -243,8 +243,8 @@ class _OrderFormState extends State<OrderForm> {
                             attributeWidget(i),
                           ],
                         ],
-                        if (selectedAddons.isNotEmpty) const Divider(),
                         if (selectedAddons.isNotEmpty) ...[
+                          const Divider(),
                           Text("Addons (${selectedAddons.length})"),
                           const SizedBox(
                             height: 5,

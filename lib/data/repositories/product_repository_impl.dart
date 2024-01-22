@@ -32,15 +32,6 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, Product>> update(Map<String, dynamic> map) async {
-    try {
-      return Right(await source.updateProduct(map));
-    } on PostgrestException catch (e) {
-      return Left(Failure(e.message));
-    }
-  }
-
-  @override
   Future<Either<Failure, void>> deleteProduct(int id) async {
     try {
       return Right(await source.deleteProduct(id));
@@ -59,9 +50,9 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<Either<Failure, void>> deleteAttributes(int id) async {
+  Future<Either<Failure, void>> removeAttributes(int id) async {
     try {
-      return Right(await source.deleteProductAttributes(id));
+      return Right(await source.removeAttributes(id));
     } on PostgrestException catch (e) {
       return Left(Failure(e.message));
     }
@@ -70,7 +61,7 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<Either<Failure, int>> saveVariation(Map<String, dynamic> map) async {
     try {
-      return Right(await source.insertVariation(map));
+      return Right(await source.saveVariation(map));
     } on PostgrestException catch (e) {
       return Left(Failure(e.message));
     }
@@ -80,7 +71,7 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<Either<Failure, void>> saveVariationOptions(
       List<Map<String, dynamic>> list) async {
     try {
-      return Right(await source.insertVariationOptions(list));
+      return Right(await source.saveVariationOptions(list));
     } on PostgrestException catch (e) {
       return Left(Failure(e.message));
     }
@@ -89,7 +80,7 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<Either<Failure, int>> savetAttributes(Map<String, dynamic> map) async {
     try {
-      return Right(await source.insertAttributes(map));
+      return Right(await source.saveAttributes(map));
     } on PostgrestException catch (e) {
       return Left(Failure(e.message));
     }
@@ -99,16 +90,16 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<Either<Failure, void>> saveAttributeOptions(
       List<Map<String, dynamic>> list) async {
     try {
-      return Right(await source.insertAttributeOptions(list));
+      return Right(await source.saveAttributeOptions(list));
     } on PostgrestException catch (e) {
       return Left(Failure(e.message));
     }
   }
 
   @override
-  Future<Either<Failure, void>> deleteVariation(int productId) async {
+  Future<Either<Failure, void>> removeVariation(int productId) async {
     try {
-      return Right(await source.deleteVariation(productId));
+      return Right(await source.removeVariation(productId));
     } on PostgrestException catch (e) {
       return Left(Failure(e.message));
     }

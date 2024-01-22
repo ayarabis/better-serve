@@ -254,7 +254,7 @@ class _ProductFormDialogState extends State<ProductFormDialog>
                   },
                 ),
                 TextFormField(
-                  readOnly: variation != null,
+                  enabled: variation == null,
                   controller: _priceController,
                   keyboardType: variation != null
                       ? TextInputType.text
@@ -268,7 +268,7 @@ class _ProductFormDialogState extends State<ProductFormDialog>
                     icon: Icon(MdiIcons.currencyPhp),
                   ),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (variation == null && (value == null || value.isEmpty)) {
                       return 'Please enter a price';
                     }
                     return null;
@@ -513,28 +513,16 @@ class _ProductFormDialogState extends State<ProductFormDialog>
                     return;
                   }
                   toggleLoadding();
-                  if (product != null) {
-                    await productProvider.updateProduct(
-                      product!.id,
-                      name,
-                      double.tryParse(price) ?? 0,
-                      selectedCategory!.id!,
-                      variation,
-                      attributes,
-                      imageUrl,
-                      allowAddon,
-                    );
-                  } else {
-                    await productProvider.saveProduct(
-                      name,
-                      double.tryParse(price) ?? 0,
-                      selectedCategory!.id!,
-                      variation,
-                      attributes,
-                      imageUrl,
-                      allowAddon,
-                    );
-                  }
+                  await productProvider.saveProduct(
+                    product?.id,
+                    name,
+                    double.tryParse(price) ?? 0,
+                    selectedCategory!.id!,
+                    variation,
+                    attributes,
+                    imageUrl,
+                    allowAddon,
+                  );
                   close();
                 },
                 child: const Icon(

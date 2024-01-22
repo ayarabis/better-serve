@@ -5,7 +5,7 @@ import 'category.dart';
 import 'variation.dart';
 
 class Product extends Equatable {
-  final int id;
+  int? id;
   final String name;
   final double basePrice;
   final String imgUrl;
@@ -47,7 +47,7 @@ class Product extends Equatable {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      if (id != null) ...{'id': id},
       'name': name,
       'base_price': basePrice,
       'img_url': imgUrl,
@@ -59,5 +59,12 @@ class Product extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name, category];
+  List<Object?> get props => [
+        id,
+        name,
+        basePrice,
+        imgUrl,
+        allowAddon,
+        category,
+      ];
 }

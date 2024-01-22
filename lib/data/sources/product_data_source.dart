@@ -22,21 +22,15 @@ class ProductDataSource {
   }
 
   Future<Product> getProductById(int id) async {
-    final data = await supabase.from(table).select(sql).single().limit(1);
+    final data =
+        await supabase.from(table).select(sql).eq('id', id).single().limit(1);
     return Product.fromMap(data);
   }
 
   Future<Product> saveProduct(Map<String, dynamic> map) async {
-    final data = await supabase.from(table).insert(map).select(sql).single();
-
-    return Product.fromMap(data);
-  }
-
-  Future updateProduct(Map<String, dynamic> map) async {
     final data = await supabase
         .from(table)
-        .update(map)
-        .eq("id", map['id'])
+        .upsert(map, onConflict: 'id')
         .select(sql)
         .single();
 
@@ -47,15 +41,15 @@ class ProductDataSource {
     await supabase.from(table).delete().eq("id", id);
   }
 
-  Future<void> deleteProductAttributes(int id) async {
+  Future<void> removeAttributes(int id) async {
     await supabase.from(tableProductAttributes).delete().eq("product_id", id);
   }
 
-  Future<void> insertVariationOptions(List<Map<String, dynamic>> list) async {
+  Future<void> saveVariationOptions(List<Map<String, dynamic>> list) async {
     await supabase.from(tableProductVariationOptions).insert(list);
   }
 
-  Future<int> insertAttributes(Map<String, dynamic> map) async {
+  Future<int> saveAttributes(Map<String, dynamic> map) async {
     final res = await supabase
         .from(tableProductAttributes)
         .insert(map)
@@ -64,18 +58,18 @@ class ProductDataSource {
     return res['id'];
   }
 
-  Future<void> insertAttributeOptions(List<Map<String, dynamic>> list) async {
+  Future<void> saveAttributeOptions(List<Map<String, dynamic>> list) async {
     await supabase.from(tableProductAttributeOptions).insert(list);
   }
 
-  Future<void> deleteVariation(int productId) async {
+  Future<void> removeVariation(int productId) async {
     await supabase
         .from(tableProductVarations)
         .delete()
         .eq("product_id", productId);
   }
 
-  Future<int> insertVariation(Map<String, dynamic> map) async {
+  Future<int> saveVariation(Map<String, dynamic> map) async {
     final data = await supabase
         .from(tableProductVarations)
         .insert(map)
