@@ -1,0 +1,72 @@
+name: better_serve
+description: "Ordering and Inventory management system for Cafe"
+publish_to: "none"
+version: 0.1.0+6
+
+environment:
+  sdk: ">=3.2.3 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_dotenv: ^5.1.0
+  fluttertoast: ^8.2.4
+  supabase_flutter: ^2.0.2
+  cupertino_icons: ^1.0.2
+  material_design_icons_flutter: ^6.0.7096
+  provider: ^6.0.5
+  badges: ^2.0.3
+  flutter_swipe_action_cell: ^3.1.0
+  select_form_field: ^2.2.0
+  cached_network_image: ^3.2.3
+  file_picker: ^5.2.10
+  path: ^1.8.2
+  collection: ^1.17.0
+  bluetooth_print: ^4.3.0
+  path_provider: ^2.0.14
+  intl: ^0.18.1
+  data_table_2: ^2.4.2
+  email_validator: ^2.1.17
+  logger: ^2.0.2+1
+  equatable: ^2.0.5
+  fpdart: ^0.5.0
+  flutter_colorpicker: ^1.0.3
+  reorderables: ^0.6.0
+  flutter_markdown: ^0.6.18+2
+  http: ^1.1.2
+  shared_preferences: ^2.2.2
+  pagination_flutter: ^0.0.8
+  webview_flutter: ^4.4.3
+  pay: ^1.1.2
+  uuid: ^4.3.3
+  responsive_framework: ^1.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
+    - assets/images/
+    - shorebird.yaml
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/images/logo-white.jpg"
+  min_sdk_android: 21
+  web:
+    generate: true
+    image_path: "assets/images/logo-white.jpg"
+  windows:
+    generate: true
+    image_path: "assets/images/logo-white.jpg"
+    icon_size: 48
+  macos:
+    generate: true
+    image_path: "assets/images/logo-white.png"
