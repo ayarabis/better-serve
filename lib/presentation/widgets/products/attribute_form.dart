@@ -1,6 +1,5 @@
-import 'package:better_serve/presentation/providers/attribute_provider.dart';
-import 'package:better_serve/presentation/widgets/common/button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:select_form_field/select_form_field.dart';
 
 import '../../providers/setting_provider.dart';
@@ -8,6 +7,8 @@ import '../common/dialog_pane.dart';
 import '../custom_form_field.dart';
 import '/domain/models/attribute.dart';
 import '/domain/models/attribute_option.dart';
+import '/presentation/providers/attribute_provider.dart';
+import '/presentation/widgets/common/button.dart';
 
 class AttributeForm extends StatefulWidget {
   final Attribute? value;
@@ -151,37 +152,40 @@ class _AttributeFormState extends State<AttributeForm> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (widget.showTemplate)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    for (Attribute attr in AttributeProvider().attributes)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 5),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(20),
-                          onTap: () {
-                            setState(() {
-                              editingAttribute = attr;
-                              trySelectSingle();
-                            });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 3, horizontal: 7),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                    color: settingProvider.primaryColor)),
-                            child: Text(
-                              attr.name,
-                              style: TextStyle(
-                                  color: settingProvider.primaryColor),
+                Consumer<AttributeProvider>(
+                    builder: (context, attributeProvider, child) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      for (Attribute attr in attributeProvider.attributes)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 5),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(20),
+                            onTap: () {
+                              setState(() {
+                                editingAttribute = attr.clone();
+                                trySelectSingle();
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 3, horizontal: 7),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                      color: settingProvider.primaryColor)),
+                              child: Text(
+                                attr.name,
+                                style: TextStyle(
+                                    color: settingProvider.primaryColor),
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                  ],
-                ),
+                        )
+                    ],
+                  );
+                }),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(

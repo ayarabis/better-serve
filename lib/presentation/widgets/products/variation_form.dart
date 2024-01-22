@@ -1,5 +1,3 @@
-import 'package:better_serve/presentation/providers/variation_provider.dart';
-import 'package:better_serve/presentation/widgets/common/button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +8,8 @@ import '/core/extenstions.dart';
 import '/core/util.dart';
 import '/domain/models/variation.dart';
 import '/domain/models/variation_option.dart';
+import '/presentation/providers/variation_provider.dart';
+import '/presentation/widgets/common/button.dart';
 
 class VariationForm extends StatefulWidget {
   final Variation? value;
@@ -89,11 +89,11 @@ class _VariationFormState extends State<VariationForm> {
                           InkWell(
                             borderRadius: BorderRadius.circular(20),
                             onTap: () {
+                              final v = variation.clone();
                               setState(() {
-                                editingVariation = variation;
-                                editingVariation.name =
-                                    variation.label ?? variation.name;
-                                defaultSelected = variation.options
+                                editingVariation = v;
+                                editingVariation.name = v.label ?? v.name;
+                                defaultSelected = v.options
                                     .indexWhere((opt) => opt.isSelected);
                               });
                             },
